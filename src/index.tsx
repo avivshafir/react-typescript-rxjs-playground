@@ -8,6 +8,7 @@ import {
 } from 'react-router-dom'
 import Stocks from "./Stocks";
 import Wikipedia from "./Wikipedia";
+import DragDrop from "./DragDrop";
 
 const Home = () => (
   <h1>React Redux RxJS Examples</h1>
@@ -20,6 +21,7 @@ const App = () => (
         <li><Link to="/">Home</Link></li>
         <li><Link to="/wikipedia">Wikipedia</Link></li>
         <li><Link to="/stocks">Stocks</Link></li>
+        <li><Link to="/dragdrop">DragDrop</Link></li>
       </ul>
 
       <hr />
@@ -27,6 +29,7 @@ const App = () => (
       <Route exact path="/" component={Home} />
       <Route path="/wikipedia" component={Wikipedia} />
       <Route path="/stocks" component={Stocks} />
+      <Route path="/dragdrop" component={DragDrop} />
     </div>
   </Router>
 )
