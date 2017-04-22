@@ -1,43 +1,46 @@
 import * as React from "react";
 import { render } from "react-dom";
 import * as Rx from "rxjs/Rx";
+import * as R from "ramda";
 
 class App extends React.Component<any, any> {
   constructor(props) {
     super();
     this.state = {
-      users: []
+      results: []
     };
   }
 
-  sendRequest() {
-    return Rx.Observable.fromPromise(
-      fetch("http://jsonplaceholder.typicode.com/users").then(res => res.json())
-    );
-  }
-
   componentDidMount() {
-    const inputText: any = document.querySelector("#inputText");
+    const searchBox: any = document.querySelector('#search');
+    const URL = 'https://en.wikipedia.org/w/api.php?action=query&format=json&list=search&utf8=1&srsearch=';
     Rx.Observable
-      .fromEvent(inputText, "keyup")
-      .pluck("target", "value")
-      .debounceTime(1000)
-      .do(query => console.log(`Querying for ${query}...`))
-      .map(this.sendRequest)
-      .switch()
-      .subscribe(users => {
-        this.setState({ users });
+      .fromEvent(searchBox, 'keyup')
+      .pluck('target', 'value')
+      .debounceTime(500)
+      .filter(val => val && val.toString().length > 0)
+      .do(term => console.log(`Searching with term ${term}`))
+      .map(query => URL + query)
+      .mergeMap(query => Rx.Observable.ajax(query)
+        .pluck('response', 'query', 'search')
+        .defaultIfEmpty([]))
+      .do(console.log)
+      .mergeMap(R.map(R.prop('title')))
+      .do(console.log)
+      .subscribe(results => {
+        console.log("setting state: ", [...this.state.results, results])
+        this.setState({ results: [...this.state.results, results] })
       });
   }
 
   render() {
     return (
       <div style={{ textAlign: "center" }}>
-        <input id="inputText" />
+        <input id="search" />
         <ul style={{ listStyle: "none" }}>
-          {this.state.users.map(x => (
-            <li key={x.id}>
-              {x.name}
+          {this.state.results.map((title, id) => (
+            <li key={id}>
+              {title}
             </li>
           ))}
         </ul>
