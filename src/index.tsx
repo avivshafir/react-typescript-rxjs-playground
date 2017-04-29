@@ -12,6 +12,7 @@ import DragDrop from "./DragDrop";
 import Using from "./Using";
 import CombineLatest from "./CombineLatest";
 import ForkJoin from "./ForkJoin";
+import Transactions from "./Transactions";
 
 const Home = () => (
   <h1>React Redux RxJS Examples</h1>
@@ -28,6 +29,7 @@ const App = () => (
         <li><Link to="/using">Using</Link></li>
         <li><Link to="/combineLatest">CombineLatest</Link></li>
         <li><Link to="/forkJoin">ForkJoin</Link></li>
+        <li><Link to="/transactions">Transactions</Link></li>
       </ul>
 
       <hr />
@@ -39,6 +41,7 @@ const App = () => (
       <Route path="/using" component={Using} />
       <Route path="/combineLatest" component={CombineLatest} />
       <Route path="/forkJoin" component={ForkJoin} />
+      <Route path="/transactions" component={Transactions} />
     </div>
   </Router>
 )
