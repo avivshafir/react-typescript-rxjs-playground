@@ -1,0 +1,9 @@
+#dragTarget {
+    background-color: #000000;
+    border: 1px solid #666666;
+    color: #ffffff;
+    padding: 10px;
+    position: absolute;
+    font-family: sans-serif;
+    cursor: move
+}
