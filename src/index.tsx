@@ -13,6 +13,8 @@ import Using from "./Using";
 import CombineLatest from "./CombineLatest";
 import ForkJoin from "./ForkJoin";
 import Transactions from "./Transactions";
+import Websockets from "./Websockets";
+import StocksFinal from "./StocksFinal";
 
 const Home = () => (
   <h1>React Redux RxJS Examples</h1>
@@ -30,6 +32,8 @@ const App = () => (
         <li><Link to="/combineLatest">CombineLatest</Link></li>
         <li><Link to="/forkJoin">ForkJoin</Link></li>
         <li><Link to="/transactions">Transactions</Link></li>
+        <li><Link to="/websockets">Websockets</Link></li>
+        <li><Link to="/stocksFinal">StocksFinal</Link></li>
       </ul>
 
       <hr />
@@ -42,19 +46,10 @@ const App = () => (
       <Route path="/combineLatest" component={CombineLatest} />
       <Route path="/forkJoin" component={ForkJoin} />
       <Route path="/transactions" component={Transactions} />
+      <Route path="/websockets" component={Websockets} />
+      <Route path="/stocksFinal" component={StocksFinal} />
     </div>
   </Router>
 )
 
 render(<App />, document.getElementById("root"));
-
-
-class Foo {
-  delete(): Promise<void> {
-    // do delete
-    return Promise.resolve();
-  }
-  deleteMany(list: Foo[]): Promise<void[]> {
-    return Promise.all(list.map((x) => x.delete()));
-  }
-}
